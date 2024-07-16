@@ -1,7 +1,7 @@
 import torch
 from comfyui import Node, Input, Output
 
-class ChannelSelectorNode(Node):
+class ChannelSelector(Node):
     # Define the node's metadata
     title = "Channel Selector"
     category = "Custom"
@@ -28,3 +28,14 @@ class ChannelSelectorNode(Node):
         output_tensor = input_tensor[channel_index].unsqueeze(0)
 
         return {"output_tensor": output_tensor}
+
+# A dictionary that contains all nodes you want to export with their names
+# NOTE: names should be globally unique
+NODE_CLASS_MAPPINGS = {
+    "ChannelSelector": ChannelSelector,
+}
+
+# A dictionary that contains the friendly/humanly readable titles for the nodes
+NODE_DISPLAY_NAME_MAPPINGS = {
+    "ChannelSelector":"ChannelSelector",
+}
