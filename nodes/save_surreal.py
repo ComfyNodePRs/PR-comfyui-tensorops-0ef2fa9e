@@ -21,7 +21,7 @@ class SaveToSurreal:
     RETURN_TYPES = ()
 
     FUNCTION = "main"
-
+    OUTPUT_NODE = True
     CATEGORY = "database_ops"
 
     def main(self, database: str, json: str, id: str) -> None:
