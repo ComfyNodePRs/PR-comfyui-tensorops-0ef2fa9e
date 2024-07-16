@@ -1,14 +1,13 @@
 import torch
-from comfyui import Node, Input, Output
 
-class ChannelSelector(Node):
+class ChannelSelector:
    
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 "image": ("IMAGE",),
-                "channel_index": ("INT", {
+                "channel": ("INT", {
                     "default": 0, 
                     "min": 0, #Minimum value
                     "max": 100, #Maximum value
@@ -20,18 +19,15 @@ class ChannelSelector(Node):
 
     RETURN_TYPES = ("IMAGE",)
 
-    FUNCTION = "process"
+    FUNCTION = "main"
 
     CATEGORY = "tensorops"
-    
-    def __init__(self):
-        super(ChannelSelectorNode, self).__init__()
 
-    def process(self, image, channel_index):
+    def main(self, image, channel):
         # Select the specified channel and add a new dimension at position 0
-        mask = image[channel_index].unsqueeze(0)
+        mask = image[channel].unsqueeze(0)
 
-        return {"mask": mask}
+        return (mask,)
 
 # A dictionary that contains all nodes you want to export with their names
 # NOTE: names should be globally unique
