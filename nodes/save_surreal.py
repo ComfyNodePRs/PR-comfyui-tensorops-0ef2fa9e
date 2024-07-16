@@ -39,7 +39,7 @@ class SaveTextToSurreal:
         return {
             "required": {
                 "database": ("STRING", {"multiline": False}),
-                "text":  ("STRING", {"multiline": True}),
+                "text":  ("STRING",),
                 "id": ("STRING", {"multiline": False}),
                 "key": ("STRING", {"multiline": False})
             },
