@@ -25,12 +25,12 @@ class SaveJsonToSurreal:
     OUTPUT_NODE = True
     CATEGORY = "database_ops"
 
-    def main(self, database: str, id: str, key: str, json: str) -> None:
+    def main(self, database: str, id: str, key: str, json: str)
         surreal_client = Surreal(SURREAL_URL, namespace=SURREAL_NAMESPACE, database=database, credentials=(SURREAL_USER, SURREAL_PASSWORD), use_http=True, timeout=10)
         surreal_connection =  surreal_client.connect()
         query = f"CREATE {SURREAL_TABLE}:`{id}` CONTENT {{'{key}': {json}}};"
         surreal_connection.query(query)
-
+        return ()
 
 class SaveTextToSurreal:
    
@@ -51,8 +51,9 @@ class SaveTextToSurreal:
     OUTPUT_NODE = True
     CATEGORY = "database_ops"
 
-    def main(self, database: str, id: str, key: str, text: str) -> None:
+    def main(self, database: str, id: str, key: str, text: str):
         surreal_client = Surreal(SURREAL_URL, namespace=SURREAL_NAMESPACE, database=database, credentials=(SURREAL_USER, SURREAL_PASSWORD), use_http=True, timeout=10)
         surreal_connection =  surreal_client.connect()
         query = f"CREATE {SURREAL_TABLE}:`{id}` CONTENT {{'{key}': '{text}'}};"
         surreal_connection.query(query)
+        return ()
