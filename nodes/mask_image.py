@@ -21,5 +21,5 @@ class MaskImage:
         print("MaskImage")
         print("ImageShape", image.shape)
         print("MaskShape", mask.shape)
-        return (image * mask.unsqueeze(0),)
+        return (image * mask.unsqueeze(0).unsqueeze(-1),)
 
