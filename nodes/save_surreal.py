@@ -1,10 +1,6 @@
-from surrealist import Surreal
+from .surreal import surreal_connect
 
-SURREAL_URL = ""
-SURREAL_NAMESPACE = ""
-SURREAL_USER = ""
-SURREAL_PASSWORD = ""
-SURREAL_TABLE = ""
+SURREAL_TABLE = "processor"
 
 class SaveJsonToSurreal:
    
@@ -24,12 +20,11 @@ class SaveJsonToSurreal:
     FUNCTION = "main"
     OUTPUT_NODE = True
     CATEGORY = "database_ops"
-
-    def main(self, database: str, id: str, key: str, json: str)
-        surreal_client = Surreal(SURREAL_URL, namespace=SURREAL_NAMESPACE, database=database, credentials=(SURREAL_USER, SURREAL_PASSWORD), use_http=True, timeout=10)
-        surreal_connection =  surreal_client.connect()
-        query = f"CREATE {SURREAL_TABLE}:`{id}` CONTENT {{'{key}': {json}}};"
-        surreal_connection.query(query)
+    
+    def main(self, database: str, id: str, key: str, json: str):
+        connection = surreal_connect(database)
+        query = f"UPDATE {SURREAL_TABLE}:`{id}` '{key}'='{json}';"
+        connection.query(query)
         return ()
 
 class SaveTextToSurreal:
@@ -52,8 +47,7 @@ class SaveTextToSurreal:
     CATEGORY = "database_ops"
 
     def main(self, database: str, id: str, key: str, text: str):
-        surreal_client = Surreal(SURREAL_URL, namespace=SURREAL_NAMESPACE, database=database, credentials=(SURREAL_USER, SURREAL_PASSWORD), use_http=True, timeout=10)
-        surreal_connection =  surreal_client.connect()
-        query = f"CREATE {SURREAL_TABLE}:`{id}` CONTENT {{'{key}': '{text}'}};"
-        surreal_connection.query(query)
+        connection = surreal_connect(database)
+        query = f"UPDATE {SURREAL_TABLE}:`{id}` SET '{key}'='{text}';"
+        connection.query(query)
         return ()
