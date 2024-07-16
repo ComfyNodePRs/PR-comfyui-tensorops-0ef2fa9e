@@ -18,8 +18,11 @@ class MaskImage:
     CATEGORY = "tensorops"
 
     def main(self, image: torch.Tensor, mask: torch.Tensor):
+        mask = mask.unsqueeze(-1)
+        new_image = image * mask
         print("MaskImage")
         print("ImageShape", image.shape)
         print("MaskShape", mask.shape)
-        return (image * mask.unsqueeze(0).unsqueeze(-1),)
+        print("NewImageShape", new_image.shape)
+        return (new_image,)
 
