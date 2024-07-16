@@ -23,7 +23,7 @@ class SaveJsonToSurreal:
     
     def main(self, database: str, id: str, key: str, json: str):
         connection = surreal_connect(database)
-        query = f"UPDATE {SURREAL_TABLE}:`{id}` '{key}'='{json}';"
+        query = f"UPDATE {SURREAL_TABLE}:`{id}` CONTENT {{{key}: {json}}};"
         connection.query(query)
         return ()
 
@@ -48,6 +48,6 @@ class SaveTextToSurreal:
 
     def main(self, database: str, id: str, key: str, text: str):
         connection = surreal_connect(database)
-        query = f"UPDATE {SURREAL_TABLE}:`{id}` SET '{key}'='{text}';"
+        query = f"UPDATE {SURREAL_TABLE}:`{id}` CONTENT {{{key}: '{text}'}};"
         connection.query(query)
         return ()
